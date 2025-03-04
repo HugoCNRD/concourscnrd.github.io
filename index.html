@@ -53,35 +53,36 @@
     
     <script>
         window.onload = function() {
-            
+            // Initialisation de la carte avec dézoom possible
             var map = L.map('map', {
                 center: [46.603354, 1.888334], 
                 zoom: 6, 
+                minZoom: 6, 
+                maxZoom: 12, 
                 maxBounds: [
                     [41.3030, -5.6767], 
-                    [51.1247, 9.6625]  
-                ], 
-                maxZoom: 7 // 
+                    [51.1247, 9.6625]   
+                ],
             });
 
-          
+       
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            
+           
             var points = [
-                { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Insérer le texte ici'.", imageUrl: "" },
-                { lat: 43.3167, lon: 5.4167, title: "Débarquement de Provence", description: "Insérer le texte ici", imageUrl: "" },
-                { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Insérer le texte ici", imageUrl: "" },
-                { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Insérer le texte ici", imageUrl: "" },
-                { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Insérer le texte ici", imageUrl: "" },
-                { lat: 48.3416, lon: -4.4949, title: "Brest et le Havre", description: "Insérer le texte ici", imageUrl: "" },
-                { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Insérer le texte ici", imageUrl: "" },
-                { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Insérer le texte ici", imageUrl: "" }
+                { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "" },
+                { lat: 43.3167, lon: 5.4167, title: "Débarquement de Provence", description: "Le débarquement de Provence en 1944.", imageUrl: "" },
+                { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "" },
+                { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "" },
+                { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "" },
+                { lat: 48.3416, lon: -4.4949, title: "Brest et le Havre", description: "Les ports de Brest et Le Havre en 1940.", imageUrl: "" },
+                { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Réseau de résistance en France.", imageUrl: "" },
+                { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "" }
             ];
 
-          
+            
             points.forEach(function(point) {
                 var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" />` : `<img src="default-image.jpg" alt="Image non disponible" />`;
 
