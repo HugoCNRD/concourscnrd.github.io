@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libérer la France</title>
-
+    <title>Libérer et refonder la France</title>
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Americano&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
     <style>
-      
-        #map {
-            height: 600px;
-            width: 100%;
+        
+        body {
+            font-family: 'Americano', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
 
-       
+        
         h1 {
             text-align: center;
             font-size: 36px;
@@ -26,7 +32,13 @@
             margin-top: -10px;
         }
 
-       
+        /
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+
+        
         .popup-image {
             width: 100%;
             height: auto;
@@ -39,7 +51,7 @@
             color: #333;
         }
 
-      
+        
         .button {
             display: block;
             width: 200px;
@@ -54,11 +66,17 @@
             transition: background-color 0.3s ease;
         }
 
+        
         .button:hover {
             background-color: #0056b3;
         }
 
        
+        .footer {
+            margin-top: 10px;
+        }
+
+      
         @media (max-width: 768px) {
             #map {
                 height: 400px; 
@@ -81,13 +99,24 @@
 </head>
 <body>
 
-    <h1>Libérer la France</h1>
+
+    <h1>Libérer et refonder la France</h1>
     <h2>Par les élèves de 301 du collège Saint Michel de Picpus</h2>
+
+  
     <div id="map"></div>
+
 
     <a href="Credits.html" class="button">Voir les crédits</a>
     <a href="contextehistorique.html" class="button">Voir le contexte historique</a>
+    
+   
+    <a href="présentation" class="button">Présentation du projet</a>
 
+    
+    <div class="footer"></div>
+
+   
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         var map = L.map('map').setView([46.603354, 1.888334], 6);
@@ -96,7 +125,6 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-       
         var points = [
             { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Ajouter ici le texte sur Saint-Exupéry", imageUrl: "" }, 
             { lat: 43.3167, lon: 5.4167, title: "Débarquement de Provence", description: "Ajouter ici le texte sur le débarquement de Provence", imageUrl: "" },
@@ -107,7 +135,6 @@
             { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Ajouter ici le texte sur le réseau Abbé Blanc", imageUrl: "" }
         ];
 
-      
         points.forEach(function(point) {
             var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" />` : `<img src="default-image.jpg" alt="Image non disponible" />`;
 
@@ -130,4 +157,5 @@
 
 </body>
 </html>
+
 
