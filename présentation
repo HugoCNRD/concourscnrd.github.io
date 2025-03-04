@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation du projet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Americano&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Americano', sans-serif; /* Applique la police à tout le texte */
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .presentation {
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .presentation h2 {
+            color: #007bff;
+        }
+
+        .presentation p {
+            font-size: 16px;
+        }
+
+        .back-button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px auto;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-button">Retour à l'accueil</a> <!-- Bouton retour à l'accueil -->
+
+    <div class="header">
+        <h1>Présentation du projet</h1>
+    </div>
+
+    <div class="presentation">
+        <h2>Objectif du projet</h2>
+        <p>Ce projet a pour but de sensibiliser aux événements clés de la Seconde Guerre mondiale en France, et plus particulièrement aux actions de la Résistance et aux déportations. À travers ce travail, nous cherchons à offrir une meilleure compréhension de ces moments historiques et à souligner l’importance de la mémoire dans notre société.</p>
+
+        <h2>Thèmes abordés</h2>
+        <ul>
+            <li>Le Débarquement en Provence et en Normandie</li>
+            <li>Le discours de Charles de Gaulle</li>
+            <li>Les actions de la Résistance</li>
+            <li>La déportation et le réseau Abbé Blanc</li>
+            <li>Le rôle des villes comme Brest et Le Havre pendant la guerre</li>
+        </ul>
+
+        <h2>Méthodologie</h2>
+        <p>Les élèves ont travaillé par groupes sur différents aspects de l’histoire de la Seconde Guerre mondiale, chacun ayant pour mission de traiter une thématique précise. Le travail a été enrichi par des recherches documentaires, des témoignages, ainsi que l’utilisation d’outils numériques pour créer des cartes interactives et des présentations multimédia.</p>
+    </div>
+
+    <div class="credits-footer">
+        <p>Merci à tous pour votre attention et votre soutien
+              
