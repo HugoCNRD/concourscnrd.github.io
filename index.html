@@ -28,6 +28,10 @@
         .white {
             background-color: #ffffff; 
             flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .red {
@@ -39,22 +43,26 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200px;
+            height: 120px; 
             position: relative;
             z-index: 1;
+            padding: 10px; 
+            flex-direction: column; 
         }
 
         h1, h2 {
             margin: 0;
             color: black; 
+            text-align: center; 
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 26px; 
+            margin-bottom: 5px; 
         }
 
         h2 {
-            font-size: 24px;
+            font-size: 18px; 
         }
 
         #map {
