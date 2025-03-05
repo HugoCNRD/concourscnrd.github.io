@@ -32,7 +32,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0;  
+            padding: 20px;  
         }
 
         .red {
@@ -47,6 +47,7 @@
             flex-direction: column; 
             margin: 0; 
             text-align: center;
+            z-index: 1;
         }
 
         h1, h2 {
@@ -81,14 +82,13 @@
             border-radius: 5px;
             text-decoration: none;
             margin: 20px auto;
-            transition: background-color 0.3s ease;
         }
 
         .button:hover {
             background-color: #0056b3;
         }
 
-        
+        /* Mobile */
         @media screen and (max-width: 768px) {
             .flag {
                 display: none; 
@@ -116,22 +116,14 @@
             }
         }
 
-     
+       
         @media screen and (min-width: 769px) {
-            .flag {
-                display: flex;
-                position: relative; 
-            }
-
-            .blue, .white, .red {
-                height: 120px; 
-            }
-
             .header {
                 position: absolute;
-                top: 100%; 
+                top: 50%; 
                 left: 50%;
-                transform: translateX(-50%);
+                transform: translate(-50%, -50%); 
+                z-index: 1;
             }
 
             #map {
@@ -212,4 +204,3 @@
 
 </body>
 </html>
-
