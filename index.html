@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libérer et refonder la France</title>
-
     <link rel="icon" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" type="image/png">
-
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    
     <style>
         body {
             font-family: 'Archivo Black', sans-serif;
@@ -53,7 +50,6 @@
             position: relative; 
         }
 
-       
         h1, h2 {
             margin: 0;
             color: black; 
@@ -93,36 +89,18 @@
             background-color: #0056b3;
         }
 
-      
+
+        .popup-image img {
+            width: 100%;    
+            height: auto;    
+            max-width: 500px; 
+            display: block; 
+            margin: 0 auto;  
+        }
+
         @media screen and (max-width: 768px) {
-            .flag {
-                display: flex;
-            }
-
-            .blue, .red {
-                display: none; 
-            }
-
-            .header {
-                padding: 20px 10px;
-                text-align: center; 
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-
-            h2 {
-                font-size: 16px;
-            }
-
-            #map {
-                height: 400px; 
-            }
-
-            .button {
-                width: 160px; 
-                font-size: 14px; 
+            .popup-image img {
+                max-width: 100%;   
             }
         }
     </style>
@@ -167,7 +145,7 @@
 
             var points = [
                 { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "" },
-                { lat: 43.3167, lon: 5.4167, title: "Débarquement de Provence", description: "Le débarquement de Provence en 1944.", imageUrl: "" },
+                { lat: 43.3167, lon: 5.4167, title: "Débarquement de Provence", description: "Le débarquement de Provence en 1944.", imageUrl: "1741246833129.jpeg" },  
                 { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "" },
                 { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "" },
                 { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "" },
