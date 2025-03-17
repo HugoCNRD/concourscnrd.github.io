@@ -179,7 +179,9 @@
 
             points.forEach(function(point) {
                 var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
-                var audio = point.audioUrl ? `<audio controls><source src="${point.audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>` : '';
+             var audioUrl = point.audioUrl ? point.audioUrl : 'audio/default.mp3';
+var audio = `<audio controls><source src="${audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>`;
+
 
                 var content = `
                     <div class="popup-content">
