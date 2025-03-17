@@ -167,18 +167,19 @@
             }).addTo(map);
 
             var points = [
-                { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "" },
-                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence en 1944.", imageUrl: "debarquementprovence.jpg" },  
-                { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "" },
-                { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "" },
-                { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "" },
-                { lat: 48.3416, lon: -4.4949, title: "Brest et le Havre", description: "Les ports de Brest et Le Havre en 1940.", imageUrl: "" },
-                { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Réseau de résistance en France.", imageUrl: "" },
-                { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "" }
+                { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "", audioUrl: "" },
+                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence en 1944.", imageUrl: "debarquementprovence.jpg", audioUrl: "" },  
+                { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "", audioUrl: "" },
+                { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "", audioUrl: "" },
+                { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "", audioUrl: "" },
+                { lat: 48.3416, lon: -4.4949, title: "Brest et le Havre", description: "Les ports de Brest et Le Havre en 1940.", imageUrl: "", audioUrl: "" },
+                { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Réseau de résistance en France.", imageUrl: "", audioUrl: "" },
+                { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "", audioUrl: "" }
             ];
 
   points.forEach(function(point) {
                 var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
+                var audio = point.audioUrl ? `<audio controls><source src="${point.audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>` : '';
 
                 var content = `
                     <div class="popup-content">
@@ -186,6 +187,7 @@
                         <div class="popup-text">
                             <p><b>${point.title}</b></p>
                             <p>${point.description || 'Description non disponible'}</p>
+                            <div class="popup-audio">${audio}</div>
                         </div>
                     </div>
                 `;
