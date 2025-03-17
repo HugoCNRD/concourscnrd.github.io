@@ -8,53 +8,157 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        .fullscreen-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fullscreen-img img {
+            max-width: 90%;
+            max-height: 90%;
+        }
         body {
             font-family: 'Archivo Black', sans-serif;
             margin: 0;
             padding: 0;
         }
 
+        .flag {
+            display: flex;
+            width: 100%;
+            height: 160px;  
+            position: relative; 
+        }
+
+        .blue {
+            background-color: #0055A4; 
+            flex: 1;
+        }
+
+        .white {
+            background-color: #ffffff; 
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;  
+        }
+
+        .red {
+            background-color: #EF4135;
+            flex: 1;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            z-index: 2; 
+            position: relative; 
+        }
+
+        h1, h2 {
+            margin: 0;
+            color: black; 
+            text-align: center;
+            font-family: 'Archivo Black', sans-serif; 
+        }
+
+        h1 {
+            font-size: 26px; 
+            margin-bottom: 5px; 
+        }
+
+        h2 {
+            font-size: 18px; 
+        }
+
         #map {
             height: 600px;
             width: 100%;
+            margin-top: 0; 
         }
 
-        .popup-content {
-            display: flex;
-            flex-direction: column;
+        .button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px auto;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
         }
 
         .popup-image img {
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto;
+            width: 100%;    
+            height: auto;    
+            max-width: 500px; 
+            display: block; 
+            margin: 0 auto;  
         }
 
-        .popup-text p {
-            font-size: 14px;
-        }
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 15px;  
+            }
 
-        .popup-audio {
-            margin-top: 10px;
+            h2 {
+                font-size: 11px;  
+            }
+
+            .popup-image img {
+                max-width: 100%;   
+            }
         }
     </style>
 </head>
 <body>
 
+    <div class="flag">
+        <div class="blue"></div>
+        <div class="white">
+            <div class="header">
+                <h1>Libérer et refonder la France</h1>
+                <h2>Par les élèves de 301 du collège Saint Michel de Picpus</h2>
+            </div>
+        </div>
+        <div class="red"></div>
+    </div>
+
     <div id="map"></div>
+
+    <a href="Credits.html" class="button">Crédits du projet</a>
+    <a href="contextehistorique.html" class="button">Contexte historique</a>
+    <a href="présentation.html" class="button">Présentation du projet</a>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
         window.onload = function() {
             var map = L.map('map', {
-                center: [46.603354, 1.888334],
-                zoom: 6,
-                minZoom: 5,
-                maxZoom: 12,
+                center: [46.603354, 1.888334], 
+                zoom: 6, 
+                minZoom: 5, 
+                maxZoom: 12, 
                 maxBounds: [
-                    [37.3030, -24.6767],
-                    [55.1247, 20.6625]
+                    [37.3030, -24.6767], 
+                    [55.1247, 20.6625]   
                 ],
             });
 
@@ -64,7 +168,7 @@
 
             var points = [
                 { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "", audioUrl: "" },
-                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence, aussi appelé opération Dragoon, a eu lieu le 15 août 1944.", imageUrl: "debarquementprovence.jpg", audioUrl: "" },
+                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "", imageUrl: "debarquementprovence.jpg", audioUrl: "" },  
                 { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "", audioUrl: "" },
                 { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "", audioUrl: "" },
                 { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "", audioUrl: "" },
@@ -73,14 +177,15 @@
                 { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "", audioUrl: "" }
             ];
 
-            points.forEach(function(point) {
-                var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
-                var audio = `<audio controls ${point.audioUrl ? '' : 'disabled'}>
-                    ${point.audioUrl ? `<source src="${point.audioUrl}" type="audio/mpeg">` : ''}
-                    Votre navigateur ne supporte pas l'audio.
-                </audio>`;
+  points.forEach(function(point) {
+                var image = point.imageUrl ? <img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/> : <img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>;
+               var audio = <audio controls ${point.audioUrl ? '' : 'disabled'}>
+                ${point.audioUrl ? <source src="${point.audioUrl}" type="audio/mpeg"> : ''}
+                Votre navigateur ne supporte pas l'audio.
+             </audio>;
 
-                var content = `
+
+                var content = 
                     <div class="popup-content">
                         <div class="popup-image">${image}</div>
                         <div class="popup-text">
@@ -89,13 +194,13 @@
                             <div class="popup-audio">${audio}</div>
                         </div>
                     </div>
-                `;
+                ;
 
                 var marker = L.marker([point.lat, point.lon]).addTo(map);
                 marker.bindPopup(content);
             });
 
-            
+    
             document.body.addEventListener('click', function(event) {
                 if (event.target.classList.contains('popup-img')) {
                     var fullscreenDiv = document.createElement('div');
