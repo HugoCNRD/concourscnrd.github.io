@@ -200,7 +200,7 @@
                 { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "", audioUrl: "" }
             ];
 
- points.forEach(function(point) {
+            points.forEach(function(point) {
                 var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
                 var audioUrl = point.audioUrl ? point.audioUrl : 'audio/default.mp3';
                 var audio = `<audio controls><source src="${audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>`;
@@ -220,14 +220,20 @@
                 marker.bindPopup(content);
             });
 
-           
+        
             var lineCoordinates = [
-                [43.5, -0.5], 
-                [50.0, 2.5],  
+                [43.5, -0.5],  
+                [44.0, 0.5],   
+                [45.0, 1.5],   
+                [46.0, 3.0],   
+                [47.5, 4.0], 
+                [48.0, 5.5],   
+                [49.0, 7.0],   
+                [50.0, 2.5]  
             ];
             L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
 
-      
+         
             var arrowIcon = L.icon({
                 iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Map_marker_icon_%28Noun_Project%29.svg/1200px-Map_marker_icon_%28Noun_Project%29.svg.png',
                 iconSize: [32, 32],
@@ -235,10 +241,10 @@
                 popupAnchor: [0, -16]
             });
 
-           
+       
             L.marker([49.4144, -0.8305], { icon: arrowIcon }).addTo(map).bindPopup("Débarquement de Normandie");
 
-       
+          
             L.marker([43.2804, 6.6176], { icon: arrowIcon }).addTo(map).bindPopup("Débarquement de Provence");
 
             document.body.addEventListener('click', function(event) {
