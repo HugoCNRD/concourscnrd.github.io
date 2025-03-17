@@ -8,6 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+        .fullscreen-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fullscreen-img img {
+            max-width: 90%;
+            max-height: 90%;
+        }
         body {
             font-family: 'Archivo Black', sans-serif;
             margin: 0;
@@ -161,8 +177,8 @@
                 { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "" }
             ];
 
-            points.forEach(function(point) {
-                var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" />` : `<img src="default-image.jpg" alt="Image non disponible" />`;
+  points.forEach(function(point) {
+                var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
 
                 var content = `
                     <div class="popup-content">
@@ -177,9 +193,26 @@
                 var marker = L.marker([point.lat, point.lon]).addTo(map);
                 marker.bindPopup(content);
             });
+
+    
+            document.body.addEventListener('click', function(event) {
+                if (event.target.classList.contains('popup-img')) {
+                    var fullscreenDiv = document.createElement('div');
+                    fullscreenDiv.classList.add('fullscreen-img');
+                    
+                    var img = document.createElement('img');
+                    img.src = event.target.src;
+                    fullscreenDiv.appendChild(img);
+
+                    fullscreenDiv.addEventListener('click', function() {
+                        document.body.removeChild(fullscreenDiv);
+                    });
+
+                    document.body.appendChild(fullscreenDiv);
+                }
+            });
         }
     </script>
-
 </body>
 </html>
 
