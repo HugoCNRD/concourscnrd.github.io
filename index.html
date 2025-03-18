@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-         .fullscreen-img {
+        .fullscreen-img {
             position: fixed;
             top: 0;
             left: 0;
@@ -29,19 +29,16 @@
             margin: 0;
             padding: 0;
         }
-
         .flag {
             display: flex;
             width: 100%;
             height: 160px;  
             position: relative; 
         }
-
         .blue {
             background-color: #0055A4; 
             flex: 1;
         }
-
         .white {
             background-color: #ffffff; 
             flex: 1;
@@ -51,12 +48,10 @@
             text-align: center;
             padding: 20px;  
         }
-
         .red {
             background-color: #EF4135;
             flex: 1;
         }
-
         .header {
             display: flex;
             flex-direction: column; 
@@ -65,29 +60,25 @@
             z-index: 2; 
             position: relative; 
         }
-
         h1, h2 {
             margin: 0;
             color: black; 
             text-align: center;
             font-family: 'Archivo Black', sans-serif; 
         }
-
         h1 {
             font-size: 26px; 
             margin-bottom: 5px; 
         }
-
         h2 {
             font-size: 18px; 
         }
-
         #map {
             height: 600px;
             width: 100%;
             margin-top: 0; 
+            z-index: 1;  /* Assure que la carte est en dessous de tout le reste */
         }
-
         .button {
             display: block;
             width: 200px;
@@ -100,11 +91,9 @@
             text-decoration: none;
             margin: 20px auto;
         }
-
         .button:hover {
             background-color: #0056b3;
         }
-
         .popup-image img {
             width: 100%;    
             height: auto;    
@@ -112,8 +101,6 @@
             display: block; 
             margin: 0 auto;  
         }
-
-     
         .popup-content {
             max-width: 300px; 
             overflow-y: auto; 
@@ -121,30 +108,24 @@
             word-wrap: break-word; 
             padding: 10px;
         }
-
         .popup-text p {
             margin: 10px 0; 
         }
-
         .leaflet-popup-content-wrapper {
             max-width: 400px; 
             word-wrap: break-word; 
         }
-
         .leaflet-popup-content {
             max-height: 400px; 
             overflow-y: auto; 
         }
-
         @media screen and (max-width: 768px) {
             h1 {
                 font-size: 15px;  
             }
-
             h2 {
                 font-size: 11px;  
             }
-
             .popup-image img {
                 max-width: 100%;   
             }
@@ -191,7 +172,7 @@
 
             var points = [
                 { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "", audioUrl: "" },
-                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence, aussi appelé opération Dragoon, a eu lieu le 15 août 1944. Il visait à libérer le sud de la France de l’occupation allemande et à ouvrir un second front pour accélérer la défaite du Troisième Reich. Initialement prévu en parallèle avec le débarquement de Normandie, il a été repoussé en raison d’un manque de ressources, notamment en navires de débarquement. Churchill s’y opposait, préférant une avancée par l’Italie et les Balkans, mais les Américains ont imposé leur stratégie pour sécuriser les ports de Marseille et Toulon, cruciaux pour le ravitaillement allié. L’opération mobilise 250 000 soldats alliés, dont la 7ᵉ armée américaine du général Patch, l’armée B française du général de Lattre de Tassigny (composée en grande partie de troupes coloniales), et des forces britanniques principalement engagées dans le soutien naval et aérien. En face, 200 000 soldats allemands du Groupe d’armées G, affaiblis par la bataille de Normandie et mal équipés, tentent de résister. L’attaque débute par des parachutages derrière les lignes ennemies, suivis d’un assaut amphibie sur les plages du Var (Saint-Tropez, Saint-Raphaël, Cavalaire-sur-Mer). Grâce à la supériorité aérienne et navale alliée, la progression est rapide. En moins d’un mois, le sud de la France est libéré : Toulon et Marseille tombent fin août, assurant un ravitaillement efficace des troupes alliées. L’armée allemande, en pleine déroute, perd environ 100 000 hommes (tués, blessés ou capturés) et bat en retraite vers l’Alsace et l’Allemagne. Bien que moins médiatisé que le débarquement de Normandie, celui de Provence a joué un rôle déterminant dans la libération de la France et l’accélération de la victoire alliée en Europe.", imageUrl: "debarquementprovence.jpg", audioUrl: "DebarquementProvence.mp3" },  
+                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence, aussi appelé opération Dragoon, a eu lieu le 15 août 1944. Il visait à libérer le sud de la France de l’occupation allemande et à ouvrir un second front pour accélérer la défaite du Troisième Reich. Initialement prévu en parallèle avec le débarquement de Normandie, il a été repoussé en raison d’un manque de ressources, notamment en navires de débarquement. Churchill s’y opposait, préférant une avancée par l’Italie et les Balkans, mais les Américains ont imposé leur stratégie pour sécuriser les ports de Marseille et Toulon, cruciaux pour le ravitaillement allié. L’opération mobilise 250 000 soldats alliés, dont la 7ᵉ armée américaine du général Patch, l’armée B française du général de Lattre de Tassigny (composée en grande partie de troupes coloniales), et des forces britanniques principalement engagées dans le soutien naval et aérien. En face, 200 000 soldats allemands du Groupe d’armées G, affaiblis par la bataille de Normandie et mal équipés, tentent de résister. L’attaque débute par des parachutages derrière les lignes ennemies, suivis d’un assaut amphibie sur les plages du Var (Saint-Tropez, Saint-Raphaël, Cavalaire-sur-Mer). Grâce à la supériorité aérienne et navale alliée, la progression est rapide. En moins d’un mois, le sud de la France est libéré : Toulon et Marseille tombent fin août, assurant un ravitaillement efficace des troupes alliées. L’armée allemande, en pleine déroute, perd environ 100 000 hommes (tués, blessés ou capturés) et bat en retraite vers l’Alsace et l’Allemagne. Bien que moins médiatisé que le débarquement de Normandie, celui de Provence a joué un rôle déterminant dans la libération de la France et l’accélération de la victoire alliée en Europe.", imageUrl: "debarquementprovence.jpg", audioUrl: "DebarquementProvence.mp3" },
                 { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "", audioUrl: "" },
                 { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "", audioUrl: "CharlesdeGaulle.mp3" },
                 { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "", audioUrl: "" },
@@ -200,30 +181,25 @@
                 { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "", audioUrl: "" }
             ];
 
-
             points.forEach(function(point) {
-                var image = point.imageUrl ? <img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/> : <img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>;
+                var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
                 var audioUrl = point.audioUrl ? point.audioUrl : 'audio/default.mp3';
-                var audio = <audio controls><source src="${audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>;
+                var audio = `<audio controls><source src="${audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>`;
 
                 var content = 
-                    <div class="popup-content">
+                    `<div class="popup-content">
                         <div class="popup-image">${image}</div>
                         <div class="popup-text">
                             <p><b>${point.title}</b></p>
                             <p>${point.description || 'Description non disponible'}</p>
                             <div class="popup-audio">${audio}</div>
                         </div>
-                    </div>
-                ;
+                    </div>`;
 
                 var marker = L.marker([point.lat, point.lon]).addTo(map);
                 marker.bindPopup(content);
             });
 
-          
-
-       
             var lineCoordinates = [
                 [46.31023, 5.93775], 
                 [46.81655, 5.96891],  
@@ -241,73 +217,61 @@
             ];
             L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
 
-         
-var arrowIcon = L.icon({
-    iconUrl: 'https://img.icons8.com/ios/452/arrow.png', 
-    iconSize: [60, 60],  
-    iconAnchor: [25, 25], 
-    popupAnchor: [0, -25] 
-});
+            var arrowIcon = L.icon({
+                iconUrl: 'https://img.icons8.com/ios/452/arrow.png', 
+                iconSize: [60, 60],  
+                iconAnchor: [25, 25], 
+                popupAnchor: [0, -25] 
+            });
 
+            function getAngle(lat1, lon1, lat2, lon2) {
+                var dx = lon2 - lon1;
+                var dy = lat2 - lat1;
+                var angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                return angle + 90; 
+            }
 
-function getAngle(lat1, lon1, lat2, lon2) {
-    var dx = lon2 - lon1;
-    var dy = lat2 - lat1;
-    var angle = Math.atan2(dy, dx) * 180 / Math.PI;
-    return angle + 90; 
-}
+            var normandyPoints = [
+                [49.4144, -0.8305],  
+                [49.5600, -0.7000],  
+                [49.3744, -0.9605],  
+                [49.2954, -0.8605],  
+                [49.4100, -0.9700]   
+            ];
 
+            var normandyPointsAdjusted = [
+                [49.4244, -0.8305],
+                [49.5700, -0.6700],
+                [49.3844, -0.9205],
+                [49.3054, -0.8105],
+                [49.4200, -0.9500]
+            ];
 
-var normandyPoints = [
-    [49.4144, -0.8305],  
-    [49.5600, -0.7000],  
-    [49.3744, -0.9605],  
-    [49.2954, -0.8605],  
-    [49.4100, -0.9700]   
-];
+            normandyPointsAdjusted.forEach(function(point, index) {
+                var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
+                L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Normandie");
+            });
 
+            var provencePoints = [
+                [43.2804, 6.6176],   
+                [43.3454, 6.4706],  
+                [43.2454, 6.6056],   
+                [43.3754, 6.3656],   
+                [43.2704, 6.3856]    
+            ];
 
-var normandyPointsAdjusted = [
-    [49.4244, -0.8305],
-    [49.5700, -0.6700],
-    [49.3844, -0.9205],
-    [49.3054, -0.8105],
-    [49.4200, -0.9500]
-];
+            var provencePointsAdjusted = [
+                [43.2904, 6.6176],
+                [43.3654, 6.4706],
+                [43.2554, 6.6056],
+                [43.3954, 6.3656],
+                [43.2804, 6.3856]
+            ];
 
-
-normandyPointsAdjusted.forEach(function(point, index) {
-    var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
-    L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Normandie");
-});
-
-
-var provencePoints = [
-    [43.2804, 6.6176],   
-    [43.3454, 6.4706],  
-    [43.2454, 6.6056],   
-    [43.3754, 6.3656],   
-    [43.2704, 6.3856]    
-];
-
-
-var provencePointsAdjusted = [
-    [43.2904, 6.6176],
-    [43.3654, 6.4706],
-    [43.2554, 6.6056],
-    [43.3954, 6.3656],
-    [43.2804, 6.3856]
-];
-
-
-provencePointsAdjusted.forEach(function(point, index) {
-    var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
-    L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Provence");
-});
-
-
-
-
+            provencePointsAdjusted.forEach(function(point, index) {
+                var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
+                L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Provence");
+            });
 
             document.body.addEventListener('click', function(event) {
                 if (event.target.classList.contains('popup-img')) {
