@@ -7,87 +7,35 @@
     <link rel="icon" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://rawgit.com/bbecquet/Leaflet.RotatedMarker/master/leaflet.rotatedMarker.js"></script>
     <style>
-         .fullscreen-img {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .fullscreen-img img {
-            max-width: 90%;
-            max-height: 90%;
-        }
         body {
             font-family: 'Archivo Black', sans-serif;
             margin: 0;
             padding: 0;
         }
-
         .flag {
             display: flex;
             width: 100%;
-            height: 160px;  
-            position: relative; 
+            height: 160px;
         }
-
-        .blue {
-            background-color: #0055A4; 
-            flex: 1;
-        }
-
+        .blue { background-color: #0055A4; flex: 1; }
         .white {
-            background-color: #ffffff; 
+            background-color: #ffffff;
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;  
+            padding: 20px;
         }
-
-        .red {
-            background-color: #EF4135;
-            flex: 1;
-        }
-
-        .header {
-            display: flex;
-            flex-direction: column; 
-            justify-content: center;
-            align-items: center;
-            z-index: 2; 
-            position: relative; 
-        }
-
-        h1, h2 {
-            margin: 0;
-            color: black; 
-            text-align: center;
-            font-family: 'Archivo Black', sans-serif; 
-        }
-
-        h1 {
-            font-size: 26px; 
-            margin-bottom: 5px; 
-        }
-
-        h2 {
-            font-size: 18px; 
-        }
-
-        #map {
-            height: 600px;
-            width: 100%;
-            margin-top: 0; 
-        }
-
+        .red { background-color: #EF4135; flex: 1; }
+        .header { text-align: center; }
+        h1, h2 { margin: 0; color: black; }
+        h1 { font-size: 26px; }
+        h2 { font-size: 18px; }
+        #map { height: 600px; width: 100%; }
         .button {
             display: block;
             width: 200px;
@@ -95,64 +43,13 @@
             background-color: #007bff;
             color: white;
             text-align: center;
-            font-size: 16px;
+            margin: 20px auto;
             border-radius: 5px;
             text-decoration: none;
-            margin: 20px auto;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        .popup-image img {
-            width: 100%;    
-            height: auto;    
-            max-width: 500px; 
-            display: block; 
-            margin: 0 auto;  
-        }
-
-     
-        .popup-content {
-            max-width: 300px; 
-            overflow-y: auto; 
-            max-height: 300px; 
-            word-wrap: break-word; 
-            padding: 10px;
-        }
-
-        .popup-text p {
-            margin: 10px 0; 
-        }
-
-        .leaflet-popup-content-wrapper {
-            max-width: 400px; 
-            word-wrap: break-word; 
-        }
-
-        .leaflet-popup-content {
-            max-height: 400px; 
-            overflow-y: auto; 
-        }
-
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 15px;  
-            }
-
-            h2 {
-                font-size: 11px;  
-            }
-
-            .popup-image img {
-                max-width: 100%;   
-            }
         }
     </style>
 </head>
 <body>
-
     <div class="flag">
         <div class="blue"></div>
         <div class="white">
@@ -163,30 +60,20 @@
         </div>
         <div class="red"></div>
     </div>
-
     <div id="map"></div>
-
     <a href="Credits.html" class="button">Crédits du projet</a>
     <a href="contextehistorique.html" class="button">Contexte historique</a>
     <a href="présentation.html" class="button">Présentation du projet</a>
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
     <script>
         window.onload = function() {
             var map = L.map('map', {
-                center: [46.603354, 1.888334], 
-                zoom: 6, 
-                minZoom: 5, 
-                maxZoom: 12, 
-                maxBounds: [
-                    [37.3030, -24.6767], 
-                    [55.1247, 20.6625]   
-                ],
+                center: [46.603354, 1.888334],
+                zoom: 6,
+                minZoom: 5,
+                maxZoom: 12
             });
-
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
             var points = [
@@ -242,91 +129,45 @@
             L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
 
          
-var arrowIcon = L.icon({
-    iconUrl: 'https://img.icons8.com/ios/452/arrow.png', 
-    iconSize: [60, 60],  
-    iconAnchor: [25, 25], 
-    popupAnchor: [0, -25] 
-});
-
-
-function getAngle(lat1, lon1, lat2, lon2) {
-    var dx = lon2 - lon1;
-    var dy = lat2 - lat1;
-    var angle = Math.atan2(dy, dx) * 180 / Math.PI;
-    return angle + 90; 
-}
-
-
-var normandyPoints = [
-    [49.4144, -0.8305],  
-    [49.5600, -0.7000],  
-    [49.3744, -0.9605],  
-    [49.2954, -0.8605],  
-    [49.4100, -0.9700]   
-];
-
-
-var normandyPointsAdjusted = [
-    [49.4244, -0.8305],
-    [49.5700, -0.6700],
-    [49.3844, -0.9205],
-    [49.3054, -0.8105],
-    [49.4200, -0.9500]
-];
-
-
-normandyPointsAdjusted.forEach(function(point, index) {
-    var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
-    L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Normandie");
-});
-
-
-var provencePoints = [
-    [43.2804, 6.6176],   
-    [43.3454, 6.4706],  
-    [43.2454, 6.6056],   
-    [43.3754, 6.3656],   
-    [43.2704, 6.3856]    
-];
-
-
-var provencePointsAdjusted = [
-    [43.2904, 6.6176],
-    [43.3654, 6.4706],
-    [43.2554, 6.6056],
-    [43.3954, 6.3656],
-    [43.2804, 6.3856]
-];
-
-
-provencePointsAdjusted.forEach(function(point, index) {
-    var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
-    L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Provence");
-});
-
-
-
-
-
-            document.body.addEventListener('click', function(event) {
-                if (event.target.classList.contains('popup-img')) {
-                    var fullscreenDiv = document.createElement('div');
-                    fullscreenDiv.classList.add('fullscreen-img');
-                    
-                    var img = document.createElement('img');
-                    img.src = event.target.src;
-                    fullscreenDiv.appendChild(img);
-
-                    fullscreenDiv.addEventListener('click', function() {
-                        document.body.removeChild(fullscreenDiv);
-                    });
-
-                    document.body.appendChild(fullscreenDiv);
-                }
+            var arrowIcon = L.icon({
+                iconUrl: 'https://img.icons8.com/ios/452/arrow.png',
+                iconSize: [60, 60],
+                iconAnchor: [30, 30]
+            });
+            
+            function getAngle(lat1, lon1, lat2, lon2) {
+                var dx = lon2 - lon1;
+                var dy = lat2 - lat1;
+                var angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                return angle + 90 + (Math.random() * 10 - 5);
+            }
+            
+            var normandyPoints = [
+                [49.4144, -0.8305], [49.5600, -0.7000], [49.3744, -0.9605]
+            ];
+            var normandyPointsAdjusted = normandyPoints.map(([lat, lon], i) => [lat + i * 0.01, lon + i * 0.01]);
+            
+            normandyPointsAdjusted.forEach(function(point, index) {
+                var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
+                L.marker(point, { icon: arrowIcon, rotationAngle: angle })
+                    .setRotationAngle(angle)
+                    .addTo(map)
+                    .bindPopup("Débarquement de Normandie");
+            });
+            
+            var provencePoints = [
+                [43.2804, 6.6176], [43.3454, 6.4706], [43.2454, 6.6056]
+            ];
+            var provencePointsAdjusted = provencePoints.map(([lat, lon], i) => [lat + i * 0.01, lon + i * 0.01]);
+            
+            provencePointsAdjusted.forEach(function(point, index) {
+                var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
+                L.marker(point, { icon: arrowIcon, rotationAngle: angle })
+                    .setRotationAngle(angle)
+                    .addTo(map)
+                    .bindPopup("Débarquement de Provence");
             });
         }
     </script>
 </body>
 </html>
-
