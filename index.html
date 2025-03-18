@@ -225,12 +225,6 @@
                 popupAnchor: [0, -25] 
             });
 
-            function getAngle(lat1, lon1, lat2, lon2) {
-                var dx = lon2 - lon1;
-                var dy = lat2 - lat1;
-                var angle = Math.atan2(dy, dx) * 180 / Math.PI;
-                return angle + 90; 
-            }
 
             var normandyPoints = [
                 [49.4144, -0.8305],  
@@ -272,8 +266,8 @@
             ];
 
                         provencePoints.forEach(function(point) {
-                L.marker(point, { icon: arrowIcon, rotationAngle: 330 })
-                    .setRotationAngle(330)
+                L.marker(point, { icon: arrowIcon, rotationAngle: 270 })
+                    .setRotationAngle(270)
                     .addTo(map)
                     .bindPopup("Débarquement de Provence");
             });
