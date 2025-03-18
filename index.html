@@ -1,340 +1,332 @@
 <!DOCTYPE html>
- <html lang="fr">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Libérer et refonder la France</title>
-     <link rel="icon" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" type="image/png">
-     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-     <style>
-          .fullscreen-img {
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100vw;
-             height: 100vh;
-             background: rgba(0, 0, 0, 0.8);
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             z-index: 1000;
-         }
-         .fullscreen-img img {
-             max-width: 90%;
-             max-height: 90%;
-         }
-         body {
-             font-family: 'Archivo Black', sans-serif;
-             margin: 0;
-             padding: 0;
-         }
- 
-         .flag {
-             display: flex;
-             width: 100%;
-             height: 160px;  
-             position: relative; 
-         }
- 
-         .blue {
-             background-color: #0055A4; 
-             flex: 1;
-         }
- 
-         .white {
-             background-color: #ffffff; 
-             flex: 1;
-             display: flex;
-             justify-content: center;
-             align-items: center;
-             text-align: center;
-             padding: 20px;  
-         }
- 
-         .red {
-             background-color: #EF4135;
-             flex: 1;
-         }
- 
-         .header {
-             display: flex;
-             flex-direction: column; 
-             justify-content: center;
-             align-items: center;
-             z-index: 2; 
-             position: relative; 
-         }
- 
-         h1, h2 {
-             margin: 0;
-             color: black; 
-             text-align: center;
-             font-family: 'Archivo Black', sans-serif; 
-         }
- 
-         h1 {
-             font-size: 26px; 
-             margin-bottom: 5px; 
-         }
- 
-         h2 {
-             font-size: 18px; 
-         }
- 
-         #map {
-             height: 600px;
-             width: 100%;
-             margin-top: 0; 
-         }
- 
-         .button {
-             display: block;
-             width: 200px;
-             padding: 10px;
-             background-color: #007bff;
-             color: white;
-             text-align: center;
-             font-size: 16px;
-             border-radius: 5px;
-             text-decoration: none;
-             margin: 20px auto;
-         }
- 
-         .button:hover {
-             background-color: #0056b3;
-         }
- 
-         .popup-image img {
-             width: 100%;    
-             height: auto;    
-             max-width: 500px; 
-             display: block; 
-             margin: 0 auto;  
-         }
- 
- 
-         .popup-content {
-             max-width: 300px; 
-             overflow-y: auto; 
-             max-height: 300px; 
-             word-wrap: break-word; 
-             padding: 10px;
-         }
- 
-         .popup-text p {
-             margin: 10px 0; 
-         }
- 
-         .leaflet-popup-content-wrapper {
-             max-width: 400px; 
-             word-wrap: break-word; 
-         }
- 
-         .leaflet-popup-content {
-             max-height: 400px; 
-             overflow-y: auto; 
-         }
- 
-         @media screen and (max-width: 768px) {
-             h1 {
-                 font-size: 15px;  
-             }
- 
-             h2 {
-                 font-size: 11px;  
-             }
- 
-             .popup-image img {
-                 max-width: 100%;   
-             }
-         }
-     </style>
- </head>
- <body>
- 
-     <div class="flag">
-         <div class="blue"></div>
-         <div class="white">
-             <div class="header">
-                 <h1>Libérer et Refonder la France</h1>
-                 <h2>Par les élèves de 301 du collège Saint-Michel de Picpus</h2>
-             </div>
-         </div>
-         <div class="red"></div>
-     </div>
- 
-     <div id="map"></div>
- 
-     <a href="Credits.html" class="button">Crédits du projet</a>
-     <a href="contextehistorique.html" class="button">Contexte historique</a>
-     <a href="présentation.html" class="button">Présentation du projet</a>
- 
-     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
- 
-     <script>
-         window.onload = function() {
-             var map = L.map('map', {
-                 center: [46.603354, 1.888334], 
-                 zoom: 6, 
-                 minZoom: 5, 
-                 maxZoom: 12, 
-                 maxBounds: [
-                     [37.3030, -24.6767], 
-                     [55.1247, 20.6625]   
-                 ],
-             });
- 
-             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-             }).addTo(map);
- 
-             var points = [
-                 { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "", audioUrl: "" },
-                 { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence, aussi appelé opération Dragoon, a eu lieu le 15 août 1944. Il visait à libérer le sud de la France de l’occupation allemande et à ouvrir un second front pour accélérer la défaite du Troisième Reich. Initialement prévu en parallèle avec le débarquement de Normandie, il a été repoussé en raison d’un manque de ressources, notamment en navires de débarquement. Churchill s’y opposait, préférant une avancée par l’Italie et les Balkans, mais les Américains ont imposé leur stratégie pour sécuriser les ports de Marseille et Toulon, cruciaux pour le ravitaillement allié. L’opération mobilise 250 000 soldats alliés, dont la 7ᵉ armée américaine du général Patch, l’armée B française du général de Lattre de Tassigny (composée en grande partie de troupes coloniales), et des forces britanniques principalement engagées dans le soutien naval et aérien. En face, 200 000 soldats allemands du Groupe d’armées G, affaiblis par la bataille de Normandie et mal équipés, tentent de résister. L’attaque débute par des parachutages derrière les lignes ennemies, suivis d’un assaut amphibie sur les plages du Var (Saint-Tropez, Saint-Raphaël, Cavalaire-sur-Mer). Grâce à la supériorité aérienne et navale alliée, la progression est rapide. En moins d’un mois, le sud de la France est libéré : Toulon et Marseille tombent fin août, assurant un ravitaillement efficace des troupes alliées. L’armée allemande, en pleine déroute, perd environ 100 000 hommes (tués, blessés ou capturés) et bat en retraite vers l’Alsace et l’Allemagne. Bien que moins médiatisé que le débarquement de Normandie, celui de Provence a joué un rôle déterminant dans la libération de la France et l’accélération de la victoire alliée en Europe.", imageUrl: "debarquementprovence.jpg", audioUrl: "DebarquementProvence.mp3" },  
-                 { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "", audioUrl: "" },
-                 { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "C’est après la libération de Paris, le 25 août 1944, par l’action combinée de la police parisienne, des forces de l'intérieur levées dans la capitale et de la division blindée du général Leclerc, que le Général Charles de Gaulle prononce son fameux discours “Paris Outragé !  Paris brisé ! Paris Martyrisé ! Mais Paris libéré !” sur le parvis de l'hôtel de Ville. Un discours qu’il a improvisé, célébrant la libération de la ville de Paris des mains des allemands et appelant à l’unité nationale. 
-", imageUrl: "", audioUrl: "CharlesdeGaulle.mp3" },
-                 { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "", audioUrl: "" },
-                 { lat: 45.8833, lon: 3.2667, title: "Procès de Philipe Pétain", description: "Le procès de Pétain", imageUrl: "", audioUrl: "ProcesdePetain.mp3" },
-                 { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Réseau de résistance en France.", imageUrl: "", audioUrl: "" },
-                 { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "", audioUrl: "" }
-             ];
- 
- 
-             points.forEach(function(point) {
-                 var image = point.imageUrl ? `<img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/>` : `<img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>`;
-                 var audioUrl = point.audioUrl ? point.audioUrl : 'audio/default.mp3';
-                 var audio = `<audio controls><source src="${audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>`;
- 
-                 var content = `
-                     <div class="popup-content">
-                         <div class="popup-image">${image}</div>
-                         <div class="popup-text">
-                             <p><b>${point.title}</b></p>
-                             <p>${point.description || 'Description non disponible'}</p>
-                             <div class="popup-audio">${audio}</div>
-                         </div>
-                     </div>
-                 `;
- 
-                 var marker = L.marker([point.lat, point.lon]).addTo(map);
-                 marker.bindPopup(content);
-             });
- 
- 
- 
- 
-             var lineCoordinates = [
-                 [46.31023, 5.93775], 
-                 [46.81655, 5.96891],  
-                 [47.24918, 5.54445],  
-                 [46.73632, 4.58256],  
-                 [46.37495, 3.98389],
-                 [46.49677, 3.52342],
-                 [47.04216, 2.47482],
-                 [47.04872, 1.92989],
-                 [47.10681, 1.61496],
-                 [46.58466, 0.71848],
-                 [45.65850, 0.51046],
-                 [45.31476, 0.13024],
-                 [43.17868, -1.39381]
-             ];
-             L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
- 
- 
- var arrowIcon = L.icon({
-     iconUrl: 'https://img.icons8.com/ios/452/arrow.png', 
-     iconSize: [60, 60],  
-     iconAnchor: [25, 25], 
-     popupAnchor: [0, -25] 
- });
- 
- 
- function getAngle(lat1, lon1, lat2, lon2) {
-     var dx = lon2 - lon1;
-     var dy = lat2 - lat1;
-     var angle = Math.atan2(dy, dx) * 180 / Math.PI;
-     return angle + 90; 
- }
- 
- 
- var normandyPoints = [
-     [49.4144, -0.8305],
-     [49.4144, -0.8305],  
-     [49.5600, -0.7000],  
-     [49.3744, -0.9605], 
-     [49.3744, -0.9605],  
-     [49.2954, -0.8605],  
-     [49.4100, -0.9700]  
-     [49.4100, -0.9700]   
- ];
- 
- 
- var normandyPointsAdjusted = [
-     [49.4244, -0.8305],
-     [49.5700, -0.6700],
-     [49.3844, -0.9205],
-     [49.3054, -0.8105],
-     [49.4200, -0.9500]
- ];
- 
- normandyPoints.forEach(function(point) {
-     L.marker(point, { icon: arrowIcon }).addTo(map).bindPopup("Débarquement de Normandie");
- 
- normandyPointsAdjusted.forEach(function(point, index) {
-     var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
-     L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Normandie");
- });
- 
- 
- var provencePoints = [
-     [43.3454, 6.4706],  
-     [43.2454, 6.6056],   
-     [43.3754, 6.3656],   
-     [43.2704, 6.3856]   
-     [43.2704, 6.3856]    
- ];
- 
- provencePoints.forEach(function(point) {
-     L.marker(point, { icon: arrowIcon }).addTo(map).bindPopup("Débarquement de Provence");
- 
- var provencePointsAdjusted = [
-     [43.2904, 6.6176],
-     [43.3654, 6.4706],
-     [43.2554, 6.6056],
-     [43.3954, 6.3656],
-     [43.2804, 6.3856]
- ];
- 
- 
- provencePointsAdjusted.forEach(function(point, index) {
-     var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
-     L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Provence");
- });
- 
- 
- 
- 
- 
-             document.body.addEventListener('click', function(event) {
-                 if (event.target.classList.contains('popup-img')) {
-                     var fullscreenDiv = document.createElement('div');
-                     fullscreenDiv.classList.add('fullscreen-img');
- 
-                     var img = document.createElement('img');
-                     img.src = event.target.src;
-                     fullscreenDiv.appendChild(img);
- 
-                     fullscreenDiv.addEventListener('click', function() {
-                         document.body.removeChild(fullscreenDiv);
-                     });
- 
-                     document.body.appendChild(fullscreenDiv);
-                 }
-             });
-         }
-     </script>
- </body>
- </html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libérer et refonder la France</title>
+    <link rel="icon" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+         .fullscreen-img {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fullscreen-img img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        body {
+            font-family: 'Archivo Black', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .flag {
+            display: flex;
+            width: 100%;
+            height: 160px;  
+            position: relative; 
+        }
+
+        .blue {
+            background-color: #0055A4; 
+            flex: 1;
+        }
+
+        .white {
+            background-color: #ffffff; 
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;  
+        }
+
+        .red {
+            background-color: #EF4135;
+            flex: 1;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            z-index: 2; 
+            position: relative; 
+        }
+
+        h1, h2 {
+            margin: 0;
+            color: black; 
+            text-align: center;
+            font-family: 'Archivo Black', sans-serif; 
+        }
+
+        h1 {
+            font-size: 26px; 
+            margin-bottom: 5px; 
+        }
+
+        h2 {
+            font-size: 18px; 
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            margin-top: 0; 
+        }
+
+        .button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px auto;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .popup-image img {
+            width: 100%;    
+            height: auto;    
+            max-width: 500px; 
+            display: block; 
+            margin: 0 auto;  
+        }
+
+     
+        .popup-content {
+            max-width: 300px; 
+            overflow-y: auto; 
+            max-height: 300px; 
+            word-wrap: break-word; 
+            padding: 10px;
+        }
+
+        .popup-text p {
+            margin: 10px 0; 
+        }
+
+        .leaflet-popup-content-wrapper {
+            max-width: 400px; 
+            word-wrap: break-word; 
+        }
+
+        .leaflet-popup-content {
+            max-height: 400px; 
+            overflow-y: auto; 
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 15px;  
+            }
+
+            h2 {
+                font-size: 11px;  
+            }
+
+            .popup-image img {
+                max-width: 100%;   
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flag">
+        <div class="blue"></div>
+        <div class="white">
+            <div class="header">
+                <h1>Libérer et Refonder la France</h1>
+                <h2>Par les élèves de 301 du collège Saint-Michel de Picpus</h2>
+            </div>
+        </div>
+        <div class="red"></div>
+    </div>
+
+    <div id="map"></div>
+
+    <a href="Credits.html" class="button">Crédits du projet</a>
+    <a href="contextehistorique.html" class="button">Contexte historique</a>
+    <a href="présentation.html" class="button">Présentation du projet</a>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        window.onload = function() {
+            var map = L.map('map', {
+                center: [46.603354, 1.888334], 
+                zoom: 6, 
+                minZoom: 5, 
+                maxZoom: 12, 
+                maxBounds: [
+                    [37.3030, -24.6767], 
+                    [55.1247, 20.6625]   
+                ],
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var points = [
+                { lat: 45.2543, lon: 5.0131, title: "Saint-Exupéry", description: "Antoine de Saint-Exupéry, écrivain et aviateur.", imageUrl: "", audioUrl: "" },
+                { lat: 43.2804, lon: 6.6176, title: "Débarquement de Provence", description: "Le débarquement de Provence, aussi appelé opération Dragoon, a eu lieu le 15 août 1944. Il visait à libérer le sud de la France de l’occupation allemande et à ouvrir un second front pour accélérer la défaite du Troisième Reich. Initialement prévu en parallèle avec le débarquement de Normandie, il a été repoussé en raison d’un manque de ressources, notamment en navires de débarquement. Churchill s’y opposait, préférant une avancée par l’Italie et les Balkans, mais les Américains ont imposé leur stratégie pour sécuriser les ports de Marseille et Toulon, cruciaux pour le ravitaillement allié. L’opération mobilise 250 000 soldats alliés, dont la 7ᵉ armée américaine du général Patch, l’armée B française du général de Lattre de Tassigny (composée en grande partie de troupes coloniales), et des forces britanniques principalement engagées dans le soutien naval et aérien. En face, 200 000 soldats allemands du Groupe d’armées G, affaiblis par la bataille de Normandie et mal équipés, tentent de résister. L’attaque débute par des parachutages derrière les lignes ennemies, suivis d’un assaut amphibie sur les plages du Var (Saint-Tropez, Saint-Raphaël, Cavalaire-sur-Mer). Grâce à la supériorité aérienne et navale alliée, la progression est rapide. En moins d’un mois, le sud de la France est libéré : Toulon et Marseille tombent fin août, assurant un ravitaillement efficace des troupes alliées. L’armée allemande, en pleine déroute, perd environ 100 000 hommes (tués, blessés ou capturés) et bat en retraite vers l’Alsace et l’Allemagne. Bien que moins médiatisé que le débarquement de Normandie, celui de Provence a joué un rôle déterminant dans la libération de la France et l’accélération de la victoire alliée en Europe.", imageUrl: "debarquementprovence.jpg", audioUrl: "DebarquementProvence.mp3" },  
+                { lat: 49.4144, lon: -0.8305, title: "Débarquement de Normandie", description: "Le 6 juin 1944, le débarquement en Normandie.", imageUrl: "", audioUrl: "" },
+                { lat: 48.8566, lon: 2.3522, title: "Discours de Gaulle", description: "Le discours de De Gaulle du 18 juin 1940.", imageUrl: "", audioUrl: "CharlesdeGaulle.mp3" },
+                { lat: 48.8333, lon: 2.5833, title: "Alain Mimoune", description: "Champion français, Alain Mimoune.", imageUrl: "", audioUrl: "" },
+                { lat: 45.8833, lon: 3.2667, title: "Procès de Philipe Pétain", description: "Le procès de Pétain", imageUrl: "", audioUrl: "ProcesdePetain.mp3" },
+                { lat: 43.2965, lon: 5.3698, title: "Réseau Abbé Blanc", description: "Réseau de résistance en France.", imageUrl: "", audioUrl: "" },
+                { lat: 48.5734, lon: 7.7521, title: "Strasbourg", description: "Strasbourg, une ville clé de la Seconde Guerre mondiale.", imageUrl: "", audioUrl: "" }
+            ];
+
+
+            points.forEach(function(point) {
+                var image = point.imageUrl ? <img src="${point.imageUrl}" alt="${point.title}" class="popup-img"/> : <img src="default-image.jpg" alt="Image non disponible" class="popup-img"/>;
+                var audioUrl = point.audioUrl ? point.audioUrl : 'audio/default.mp3';
+                var audio = <audio controls><source src="${audioUrl}" type="audio/mpeg">Votre navigateur ne supporte pas l'audio.</audio>;
+
+                var content = 
+                    <div class="popup-content">
+                        <div class="popup-image">${image}</div>
+                        <div class="popup-text">
+                            <p><b>${point.title}</b></p>
+                            <p>${point.description || 'Description non disponible'}</p>
+                            <div class="popup-audio">${audio}</div>
+                        </div>
+                    </div>
+                ;
+
+                var marker = L.marker([point.lat, point.lon]).addTo(map);
+                marker.bindPopup(content);
+            });
+
+          
+
+       
+            var lineCoordinates = [
+                [46.31023, 5.93775], 
+                [46.81655, 5.96891],  
+                [47.24918, 5.54445],  
+                [46.73632, 4.58256],  
+                [46.37495, 3.98389],
+                [46.49677, 3.52342],
+                [47.04216, 2.47482],
+                [47.04872, 1.92989],
+                [47.10681, 1.61496],
+                [46.58466, 0.71848],
+                [45.65850, 0.51046],
+                [45.31476, 0.13024],
+                [43.17868, -1.39381]
+            ];
+            L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
+
+         
+var arrowIcon = L.icon({
+    iconUrl: 'https://img.icons8.com/ios/452/arrow.png', 
+    iconSize: [60, 60],  
+    iconAnchor: [25, 25], 
+    popupAnchor: [0, -25] 
+});
+
+
+function getAngle(lat1, lon1, lat2, lon2) {
+    var dx = lon2 - lon1;
+    var dy = lat2 - lat1;
+    var angle = Math.atan2(dy, dx) * 180 / Math.PI;
+    return angle + 90; 
+}
+
+
+var normandyPoints = [
+    [49.4144, -0.8305],  
+    [49.5600, -0.7000],  
+    [49.3744, -0.9605],  
+    [49.2954, -0.8605],  
+    [49.4100, -0.9700]   
+];
+
+
+var normandyPointsAdjusted = [
+    [49.4244, -0.8305],
+    [49.5700, -0.6700],
+    [49.3844, -0.9205],
+    [49.3054, -0.8105],
+    [49.4200, -0.9500]
+];
+
+
+normandyPointsAdjusted.forEach(function(point, index) {
+    var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
+    L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Normandie");
+});
+
+
+var provencePoints = [
+    [43.2804, 6.6176],   
+    [43.3454, 6.4706],  
+    [43.2454, 6.6056],   
+    [43.3754, 6.3656],   
+    [43.2704, 6.3856]    
+];
+
+
+var provencePointsAdjusted = [
+    [43.2904, 6.6176],
+    [43.3654, 6.4706],
+    [43.2554, 6.6056],
+    [43.3954, 6.3656],
+    [43.2804, 6.3856]
+];
+
+
+provencePointsAdjusted.forEach(function(point, index) {
+    var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
+    L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Provence");
+});
+
+
+
+
+
+            document.body.addEventListener('click', function(event) {
+                if (event.target.classList.contains('popup-img')) {
+                    var fullscreenDiv = document.createElement('div');
+                    fullscreenDiv.classList.add('fullscreen-img');
+                    
+                    var img = document.createElement('img');
+                    img.src = event.target.src;
+                    fullscreenDiv.appendChild(img);
+
+                    fullscreenDiv.addEventListener('click', function() {
+                        document.body.removeChild(fullscreenDiv);
+                    });
+
+                    document.body.appendChild(fullscreenDiv);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
 
