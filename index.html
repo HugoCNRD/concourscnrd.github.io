@@ -227,18 +227,18 @@
 
 
             var normandyPoints = [
-                [49.4144, -0.8305],  
-                [49.5600, -0.7000],  
+                [49.4244, 0.8305],  
+                [49.5700, 1.2342],  
             ];
 
             var normandyPointsAdjusted = [
-                [49.4244, -0.8305],
-                [49.5700, -0.6700],
+                [49.4244, 0.8305],
+                [49.5700, 1.2342],
             ];
 
                         normandyPoints.forEach(function(point) {
-                L.marker(point, { icon: arrowIcon, rotationAngle: 135 })
-                    .setRotationAngle(135)
+                L.marker(point, { icon: arrowIcon, rotationAngle: 70 })
+                    .setRotationAngle(70)
                     .addTo(map)
                     .bindPopup("Débarquement de Normandie");
             });
