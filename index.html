@@ -152,6 +152,7 @@
     <a href="présentation.html" class="button">Présentation du projet</a>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://rawgit.com/bbecquet/Leaflet.RotatedMarker/master/leaflet.rotatedMarker.js"></script>
 
     <script>
         window.onload = function() {
@@ -247,10 +248,22 @@
                 [49.4200, -0.9500]
             ];
 
+                        normandyPoints.forEach(function(point) {
+                L.marker(point, { icon: arrowIcon, rotationAngle: 135 })
+                    .setRotationAngle(135)
+                    .addTo(map)
+                    .bindPopup("Débarquement de Normandie");
+            });
+            
+
             normandyPointsAdjusted.forEach(function(point, index) {
                 var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
-                L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Normandie");
+             L.marker(point, { icon: arrowIcon, rotation: angle })
+    .setRotationAngle(angle)
+    .addTo(map)
+    .bindPopup("Débarquement de Normandie");
             });
+
 
             var provencePoints = [
                 [43.2804, 6.6176],   
@@ -268,9 +281,19 @@
                 [43.2804, 6.3856]
             ];
 
+                        provencePoints.forEach(function(point) {
+                L.marker(point, { icon: arrowIcon, rotationAngle: 315 })
+                    .setRotationAngle(315)
+                    .addTo(map)
+                    .bindPopup("Débarquement de Provence");
+            });
+
             provencePointsAdjusted.forEach(function(point, index) {
                 var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
-                L.marker(point, { icon: arrowIcon, rotationAngle: angle }).addTo(map).bindPopup("Débarquement de Provence");
+             L.marker(point, { icon: arrowIcon, rotation: angle })
+    .setRotationAngle(angle)
+    .addTo(map)
+    .bindPopup("Débarquement de Provence");
             });
 
             document.body.addEventListener('click', function(event) {
