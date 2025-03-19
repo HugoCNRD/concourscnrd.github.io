@@ -8,22 +8,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        .fullscreen-img {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .fullscreen-img img {
-            max-width: 90%;
-            max-height: 90%;
-        }
+.fullscreen-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.fullscreen-img img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
         body {
             font-family: 'Archivo Black', sans-serif;
             margin: 0;
@@ -298,18 +311,24 @@ provencePointsAdjusted.forEach(function(point, index) {
                 if (event.target.classList.contains('popup-img')) {
                     var fullscreenDiv = document.createElement('div');
                     fullscreenDiv.classList.add('fullscreen-img');
-                    
+            
                     var img = document.createElement('img');
                     img.src = event.target.src;
                     fullscreenDiv.appendChild(img);
-
-                    fullscreenDiv.addEventListener('click', function() {
-                        document.body.removeChild(fullscreenDiv);
-                    });
-
+            
                     document.body.appendChild(fullscreenDiv);
+                    document.body.style.overflow = 'hidden'; 
+            
+                   
+                    fullscreenDiv.addEventListener('click', function(e) {
+                        if (e.target === fullscreenDiv) {
+                            document.body.removeChild(fullscreenDiv);
+                            document.body.style.overflow = ''; 
+                        }
+                    });
                 }
             });
+
         }
     </script>
 </body>
