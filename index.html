@@ -235,9 +235,10 @@ var lineCoordinates = [
 var redLine = L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
 
 
-var bufferDistance = 0.02;  
-lineCoordinates.forEach(function(coord, index) {
-  
+var bufferDistance = 0.02;
+
+
+lineCoordinates.forEach(function(coord) {
     L.circle(coord, { radius: bufferDistance * 100000, color: 'transparent' })
         .addTo(map)
         .on('click', function() {
@@ -245,19 +246,16 @@ lineCoordinates.forEach(function(coord, index) {
                 .setLatLng(coord)
                 .setContent("Ligne de démarcation")
                 .openOn(map);
-
-
+        });
+});
 
 
 redLine.on('click', function() {
-   "
     L.popup()
         .setLatLng([46.5, 4.5]) 
         .setContent("Ligne de démarcation, de 1940 à 1944, délimitant la France occupée par le régime nazi, au Nord, et la France dite «libre», au Sud, contrôlée par le régime de Vichy")
         .openOn(map);
 });
-
-
           
 
 var arrowIcon = L.icon({
