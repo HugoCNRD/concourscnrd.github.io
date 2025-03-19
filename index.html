@@ -277,16 +277,18 @@ var provencePointsAdjusted = [
 
 var arrowIcon = L.icon({
     iconUrl: "https://img.icons8.com/ios/452/arrow.png",
-    iconSize: [30, 30],
+    iconSize: [60, 30],
     iconAnchor: [15, 15]
 });
 
 
-provencePoints.forEach((point, index) => {
-    var angle = getAngle(
-        provencePoints[index][0], provencePoints[index][1], 
-        provencePointsAdjusted[index][0], provencePointsAdjusted[index][1]
-    );
+provencePoints.forEach(function(point) {
+    L.marker(point, { icon: arrowIcon, rotationAngle: 350 }) 
+        .setRotationAngle(350) 
+        .addTo(map)
+        .bindPopup("Débarquement de Provence");
+});
+
 
     L.marker(provencePointsAdjusted[index], { 
         icon: arrowIcon, 
