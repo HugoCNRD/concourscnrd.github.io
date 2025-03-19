@@ -250,13 +250,17 @@ normandyPointsAdjusted.forEach(function(point, index) {
 });
             
 
-            normandyPointsAdjusted.forEach(function(point, index) {
-                var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]);
-             L.marker(point, { icon: arrowIcon, rotation: angle })
+normandyPointsAdjusted.forEach(function(point, index) {
+    var angle = getAngle(point[0], point[1], normandyPoints[index][0], normandyPoints[index][1]) + 50;
+    
+    L.marker(point, { 
+        icon: arrowIcon, 
+        rotationAngle: angle 
+    })
     .setRotationAngle(angle)
     .addTo(map)
     .bindPopup("Débarquement de Normandie");
-            });
+});
 
 
 
