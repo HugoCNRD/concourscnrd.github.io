@@ -215,22 +215,33 @@
                 marker.bindPopup(content);
             });
 
-            var lineCoordinates = [
-                [46.31023, 5.93775], 
-                [46.81655, 5.96891],  
-                [47.24918, 5.54445],  
-                [46.73632, 4.58256],  
-                [46.37495, 3.98389],
-                [46.49677, 3.52342],
-                [47.04216, 2.47482],
-                [47.04872, 1.92989],
-                [47.10681, 1.61496],
-                [46.58466, 0.71848],
-                [45.65850, 0.51046],
-                [45.31476, 0.13024],
-                [43.17868, -1.39381]
-            ];
-            L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
+var lineCoordinates = [
+    [46.31023, 5.93775], 
+    [46.81655, 5.96891],  
+    [47.24918, 5.54445],  
+    [46.73632, 4.58256],  
+    [46.37495, 3.98389],
+    [46.49677, 3.52342],
+    [47.04216, 2.47482],
+    [47.04872, 1.92989],
+    [47.10681, 1.61496],
+    [46.58466, 0.71848],
+    [45.65850, 0.51046],
+    [45.31476, 0.13024],
+    [43.17868, -1.39381]
+];
+
+var redLine = L.polyline(lineCoordinates, { color: 'red', weight: 3, dashArray: '5, 5' }).addTo(map);
+
+
+redLine.on('click', function() {
+
+    L.popup()
+        .setLatLng([46.5, 4.5]) 
+        .setContent("Ligne de démarcation, de 1940 à 1944, délimitant la France occupée par le régime nazi, au Nord, et la France dite libre, au Sud, contrôlée par le régime de Vichy")
+        .openOn(map);
+});
+
           
 
 var arrowIcon = L.icon({
