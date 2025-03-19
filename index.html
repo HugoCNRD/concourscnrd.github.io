@@ -283,7 +283,7 @@ var arrowIcon = L.icon({
 
 
 provencePointsAdjusted.forEach(function(point, index) {
-    var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]) + 180;
+    var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]) + 10;
     L.marker(point, { icon: arrowIcon, rotationAngle: angle })
         .setRotationAngle(angle)
         .addTo(map)
