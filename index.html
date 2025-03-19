@@ -282,9 +282,10 @@ var arrowIcon = L.icon({
 });
 
 
-provencePoints.forEach(function(point) {
-    L.marker(point, { icon: arrowIcon, rotationAngle: 350 }) 
-        .setRotationAngle(350) 
+provencePointsAdjusted.forEach(function(point, index) {
+    var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]) + 180;
+    L.marker(point, { icon: arrowIcon, rotationAngle: angle })
+        .setRotationAngle(angle)
         .addTo(map)
         .bindPopup("Débarquement de Provence");
 });
