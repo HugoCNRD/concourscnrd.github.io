@@ -255,32 +255,47 @@
             });
 
 
-            var provencePoints = [
-                [43.2804, 6.6176],   
-                [43.3454, 6.4706],  
-                [43.2454, 6.6056],     
-            ];
 
-            var provencePointsAdjusted = [
-                [43.2904, 6.6176],
-                [43.3654, 6.4706],
-                [43.2554, 6.6056],
-            ];
+function getAngle(lat1, lon1, lat2, lon2) {
+    return Math.atan2(lat2 - lat1, lon2 - lon1) * 180 / Math.PI;
+}
 
-                        provencePoints.forEach(function(point) {
-                L.marker(point, { icon: arrowIcon, rotationAngle: 270 })
-                    .setRotationAngle(270)
-                    .addTo(map)
-                    .bindPopup("Débarquement de Provence");
-            });
 
-            provencePointsAdjusted.forEach(function(point, index) {
-                var angle = getAngle(point[0], point[1], provencePoints[index][0], provencePoints[index][1]);
-             L.marker(point, { icon: arrowIcon, rotation: angle })
-    .setRotationAngle(angle)
+var provencePoints = [
+    [43.2500, 6.6333],
+    [43.1367, 6.3744],
+    [43.0233, 6.1558]
+];
+
+
+var provencePointsAdjusted = [
+    [43.2600, 6.6400],
+    [43.1467, 6.3844],
+    [43.0333, 6.1658]
+];
+
+
+var arrowIcon = L.icon({
+    iconUrl: "https://img.icons8.com/ios/452/arrow.png",
+    iconSize: [30, 30],
+    iconAnchor: [15, 15]
+});
+
+
+provencePoints.forEach((point, index) => {
+    var angle = getAngle(
+        provencePoints[index][0], provencePoints[index][1], 
+        provencePointsAdjusted[index][0], provencePointsAdjusted[index][1]
+    );
+
+    L.marker(provencePointsAdjusted[index], { 
+        icon: arrowIcon, 
+        rotationAngle: angle, 
+        zIndexOffset: 1000 
+    })
     .addTo(map)
     .bindPopup("Débarquement de Provence");
-            });
+});
 
             document.body.addEventListener('click', function(event) {
                 if (event.target.classList.contains('popup-img')) {
