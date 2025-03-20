@@ -8,6 +8,16 @@
     <link rel="icon" href="https://www.l-ektric.com/portfolio/wp-content/uploads/2021/05/st-michel-de-picpus-logo.png" type="image/png">
 
     <style>
+
+        .flex-justify-center {
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;     
+            margin: 0;             
+            text-align: center;     
+        }
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -231,11 +241,15 @@
             <p>Ce site est une ressource interactive qui vous permet de découvrir l’histoire de la libération de la France à travers une carte dynamique, des informations détaillées sur des événements historiques, des images et des audios. En naviguant sur le site, vous pouvez explorer différentes étapes importantes de la Seconde Guerre mondiale, tout en bénéficiant d’une expérience multimédia enrichissante. Ce site est le fruit d'un travail de codage, fait entièrement par les élèves de l'équipe informatique, et d'un travail de recherche, dessin, rédaction.</p>
         </div>
 
-        <div>
-            <video width="640" height="360" controls>
-  <source src="Videosite.mp4">
-  Votre navigateur ne supporte pas la balise vidéo.
-</video>
+
+    <div class="flex-justify-center">
+        <video width="640" height="360" controls>
+            <source src="Videosite.mp4">
+            Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+        <figcaption>Mode d'emploi vidéo de la carte interactive</figcaption>
+    </div>
+
 
 
         <a href="https://hugocnrd.github.io/concourscnrd.github.io/index.html" class="button">Retour à l'accueil</a>
